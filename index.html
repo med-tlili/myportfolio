@@ -167,7 +167,8 @@
                     <p>I'm a passionate developer  i have create modern, responsive websites and web applications. I specialize in Java frameworks and have a strong foundation in both frontend and backend development.</p>
                     <p>My approach combines technical expertise with an eye for design, ensuring that applications are not only functional but also provide an excellent user experience.</p>
                     <p>When I'm not coding, you can find me drawing, reading tech blogs, or contributing to open source projects.</p>
-                    <a href="#" class="btn primary">Download Resume</a>
+                    <a href="https://drive.usercontent.google.com/uc?id=1udKm_bBV8A4oZBUCM75fjuOvfx81n6JK&authuser=0&export=download
+                    " class="btn primary">Download Resume</a>
                 </div>
             </div>
         </div>
@@ -177,28 +178,70 @@
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
             <div class="contact-container">
-                <form class="contact-form">
+                <form id="contactForm" class="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                      <input type="text" id="name" name="name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                      <input type="email" id="email" name="email" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                      <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
                     </div>
                     <button type="submit" class="btn primary">Send Message</button>
-                </form>
+                  </form>
+                  
+                  <script>
+                    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+                      e.preventDefault();
+                      
+                      const name = document.getElementById('name').value;
+                      const email = document.getElementById('email').value;
+                      const message = document.getElementById('message').value;
+                      
+                      if (!name || !email || !message) {
+                        alert("Please fill all fields!");
+                        return;
+                      }
+                  
+                      try {
+                        const response = await fetch('https://formsubmit.co/ajax/medaziztlilipro@gmail.com', {
+                          method: 'POST',
+                          headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                          },
+                          body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            message: message,
+                            _subject: "New portfolio message!",
+                            _captcha: false
+                          })
+                        });
+                        
+                        if (response.ok) {
+                          document.getElementById('contactForm').reset();
+                          alert("Thank you! Your message has been sent.");
+                        } else {
+                          throw new Error('Failed to send');
+                        }
+                      } catch (error) {
+                        alert("Oops! Something went wrong. Please try again later.");
+                        console.error(error);
+                      }
+                    });
+                  </script>
                 <div class="contact-info">
                     <h3>Contact Information</h3>
-                    <p><i class="fas fa-envelope"></i> john.doe@example.com</p>
-                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-                    <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+                    <p><i class="fas fa-envelope"></i> medaziztlilipro@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +216 94 157 831</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Fouchana, Ben Arous</p>
                     <div class="social-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-codepen"></i></a>
+                        <a href="https://github.com/med-tlili" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/med-aziz-tlili-26871b321/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/aziz.tlili.52012/" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/md_aziz_tlili/" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -207,10 +250,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> John Doe. All rights reserved.</p>
+            <p>&copy; <span id="year"></span> Med Aziz Tlili. All rights reserved.</p>
             <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
         </div>
     </footer>
+
 
     <script src="script.js"></script>
 </body>
